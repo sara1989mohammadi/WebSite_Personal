@@ -16,12 +16,14 @@ namespace EFCore.Repository
         #region Fields
         private readonly IConfiguration _configuration;
         #endregion
+
         #region Ctor
         public UserRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }
         #endregion
+
         #region Methods
         public async Task<int> AddAsync(Users users)
         {

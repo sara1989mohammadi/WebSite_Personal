@@ -1,8 +1,10 @@
 ﻿using Contracts.Repositories;
+using Dapper;
 using Entites;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,12 +22,17 @@ namespace EFCore.Repository
             _configuration = configuration;
         }
         #endregion
+
         #region Methods
-
-
-        public Task<int> AddAsync(Article article)
+        public async Task<int> AddAsync(Article article)
         {
-            throw new NotImplementedException();
+            var sql = ("Insert Into Article(Title,Description,FileUrl,Publisher,DatePublisher,ImageUrl) VALUES (@Title, @Description, @FileUrl, @Publisher, @DatePublisher, @ImageUrl)");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteAsync(sql, article);
+                return result;
+            }
         }
 
         public Task<int> DeleteAsync(int id)
@@ -43,9 +50,15 @@ namespace EFCore.Repository
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateAsync(Activity article)
+        public async Task<int> UpdateAsync(Activity article)
         {
-            throw new NotImplementedException();
+            var sql = ("Update Article Title =@Title ,Description=@Description,FileUrl =@FileUrl ,Publisher=@Publisher,DatePublisher =@DatePublisher ,ImageUrl=@ImageUrl");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteAsync(sql, article);
+                return result;
+            }
         }
         #endregion
     }

@@ -50,9 +50,15 @@ namespace EFCore.Repository
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateAsync(Activity activity)
+        public async Task<int> UpdateAsync(Activity activity)
         {
-            throw new NotImplementedException();
+            var sql = ("Update Activity Title=@Title");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteAsync(sql, activity);
+                return result;
+            }
         }
         #endregion
     }
