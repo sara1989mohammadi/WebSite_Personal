@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,9 +41,15 @@ namespace EFCore.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IReadOnlyList<Article>> GetAllAsync()
+        public async Task<IReadOnlyList<Article>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var sql = ("Select * From Article");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Article>(sql);
+                return result.ToList();
+            }
         }
 
         public Task<Article> GetByIdAsync(int id)
