@@ -62,7 +62,13 @@ namespace EFCore.Repository
 
         public async Task<ShortArticle> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var sql = ("Select * From ShortArticle where Id=@Id");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.QuerySingleOrDefaultAsync(sql, new { @Id = id });
+                return result;
+            }
         }
 
         public async Task<int> UpdateAsync(ShortArticle shortArticle)
