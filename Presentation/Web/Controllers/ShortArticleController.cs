@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Entites;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,43 @@ namespace Web.Controllers
     public class ShortArticleController : Controller
     {
         #region Fields
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        #endregion
-        #region Methods
-        public IActionResult Index()
+        public ShortArticleController(IUnitOfWork unitOfWork)
         {
-            return View();
+            _unitOfWork = unitOfWork;
+        }
+        #endregion
+
+        #region Methods      
+
+        public async Task<IActionResult> GetAll()
+        {
+            var model = await _unitOfWork.ShortArticle.GetAllAsync();
+            return View(model);
+        }
+
+        public async Task<IActionResult> GetById(int id)
+        {
+            var model = await _unitOfWork.ShortArticle.GetByIdAsync(id);
+            return View(model);
+        }
+        public async Task<IActionResult> Add(ShortArticle shortArticle)
+        {
+            var model = await _unitOfWork.ShortArticle.AddAsync(shortArticle);
+            return View(model);
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await _unitOfWork.ShortArticle.DeleteAsync(id);
+            return View(model);
+        }
+        public async Task<IActionResult> Update(ShortArticle shortArticle)
+        {
+            var model = await _unitOfWork.ShortArticle.UpdateAsync(shortArticle);
+            return Ok(model);
         }
         #endregion
     }

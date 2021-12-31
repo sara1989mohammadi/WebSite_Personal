@@ -69,7 +69,7 @@ namespace EFCore.Repository
             }
         }
 
-        public async Task<int> UpdateAsync(Activity article)
+        public async Task<int> UpdateAsync(Article article)
         {
             var sql = ("Update Article Title =@Title ,Description=@Description,FileUrl =@FileUrl ,Publisher=@Publisher,DatePublisher =@DatePublisher ,ImageUrl=@ImageUrl");
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))

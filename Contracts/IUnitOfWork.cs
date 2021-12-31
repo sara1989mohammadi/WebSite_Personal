@@ -11,10 +11,10 @@ namespace Contracts
        
         IArticleRepository Article { get; }
         IUserRepository Users { get; }
-        IBiographyRepository biography { get; }
-        IBookRepository book { get; }
-        ICVRepository cv { get; }
-        IShortArticleRepository shortArticle { get; }
+        IBiographyRepository Biography { get; }
+        IBookRepository Book { get; }
+        ICVRepository Cv { get; }
+        IShortArticleRepository ShortArticle { get; }
         void Execute();
     }
 }

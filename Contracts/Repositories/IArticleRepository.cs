@@ -12,7 +12,7 @@ namespace Contracts.Repositories
         Task<Article> GetByIdAsync(int id);
         Task<IReadOnlyList<Article>> GetAllAsync();
         Task<int> AddAsync(Article article);
-        Task<int> UpdateAsync(Activity article);
+        Task<int> UpdateAsync(Article article);
         Task<int> DeleteAsync(int id);
         #endregion
     }

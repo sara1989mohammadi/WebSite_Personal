@@ -18,10 +18,10 @@ namespace EFCore
 
             Activity = activityRepository;
             Article = articleRepository;
-            biography = biographyRepository;
-            book = bookRepository;
-            cv = cvRepository;
-            shortArticle = shortArticleRepository;
+            Biography = biographyRepository;
+            Book = bookRepository;
+            Cv = cvRepository;
+            ShortArticle = shortArticleRepository;
             Users = userRepository;
         }
 
@@ -29,13 +29,13 @@ namespace EFCore
 
         public IArticleRepository Article { get; }
 
-        public IBiographyRepository biography { get; }
+        public IBiographyRepository Biography { get; }
 
-        public IBookRepository book { get; }
+        public IBookRepository Book { get; }
 
-        public ICVRepository cv { get; }
+        public ICVRepository Cv { get; }
 
-        public IShortArticleRepository shortArticle { get; }
+        public IShortArticleRepository ShortArticle { get; }
         public IUserRepository Users { get; }
 
         public void Execute()

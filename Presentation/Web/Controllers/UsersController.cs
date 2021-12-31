@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
-    public class ActivityController : Controller
+    public class UsersController : Controller
     {
         #region Fields
         private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public ActivityController(IUnitOfWork unitOfWork)
+        public UsersController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -25,28 +25,28 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            var model =await _unitOfWork.Activity.GetAllAsync();
+            var model = await _unitOfWork.Users.GetAllAsync();
             return View(model);
         }
 
         public async Task<IActionResult> GetById(int id)
         {
-            var model = await _unitOfWork.Activity.GetByIdAsync(id);
+            var model = await _unitOfWork.Users.GetByIdAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Add(Activity activity)
+        public async Task<IActionResult> Add(Users users)
         {
-            var model = await _unitOfWork.Activity.AddAsync(activity);
+            var model = await _unitOfWork.Users.AddAsync(users);
             return View(model);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _unitOfWork.Activity.DeleteAsync(id);
+            var model = await _unitOfWork.Users.DeleteAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Update(Activity activity)
+        public async Task<IActionResult> Update(Users users)
         {
-            var model = await _unitOfWork.Activity.UpdateAsync(activity);
+            var model = await _unitOfWork.Users.UpdateAsync(users);
             return Ok(model);
         }
         #endregion
