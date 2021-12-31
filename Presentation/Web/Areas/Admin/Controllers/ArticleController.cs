@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Controllers
+namespace Web.Areas.Admin.Controllers
 {
-    public class ShortArticleController : Controller
+    public class ArticleController : Controller
     {
         #region Fields
         private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public ShortArticleController(IUnitOfWork unitOfWork)
+        public ArticleController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -25,28 +25,28 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            var model = await _unitOfWork.ShortArticle.GetAllAsync();
+            var model = await _unitOfWork.Article.GetAllAsync();
             return View(model);
         }
 
         public async Task<IActionResult> GetById(int id)
         {
-            var model = await _unitOfWork.ShortArticle.GetByIdAsync(id);
+            var model = await _unitOfWork.Article.GetByIdAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Add(ShortArticle shortArticle)
+        public async Task<IActionResult> Add(Article article)
         {
-            var model = await _unitOfWork.ShortArticle.AddAsync(shortArticle);
+            var model = await _unitOfWork.Article.AddAsync(article);
             return View(model);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _unitOfWork.ShortArticle.DeleteAsync(id);
+            var model = await _unitOfWork.Article.DeleteAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Update(ShortArticle shortArticle)
+        public async Task<IActionResult> Update(Article article)
         {
-            var model = await _unitOfWork.ShortArticle.UpdateAsync(shortArticle);
+            var model = await _unitOfWork.Article.UpdateAsync(article);
             return Ok(model);
         }
         #endregion

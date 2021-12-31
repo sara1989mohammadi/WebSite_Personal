@@ -6,47 +6,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Controllers
+namespace Web.Areas.Admin.Controllers
 {
-    public class BookController : Controller
+    public class BiographyController : Controller
     {
         #region Fields
         private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public BookController(IUnitOfWork unitOfWork)
+        public BiographyController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
         #endregion
-
         #region Methods      
 
         public async Task<IActionResult> GetAll()
         {
-            var model = await _unitOfWork.Book.GetAllAsync();
+            var model = await _unitOfWork.Biography.GetAllAsync();
             return View(model);
         }
 
         public async Task<IActionResult> GetById(int id)
         {
-            var model = await _unitOfWork.Book.GetByIdAsync(id);
+            var model = await _unitOfWork.Biography.GetByIdAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Add(Book book)
+        public async Task<IActionResult> Add(Biography biography)
         {
-            var model = await _unitOfWork.Book.AddAsync(book);
+            var model = await _unitOfWork.Biography.AddAsync(biography);
             return View(model);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _unitOfWork.Book.DeleteAsync(id);
+            var model = await _unitOfWork.Biography.DeleteAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Update(Book book)
+        public async Task<IActionResult> Update(Biography biography)
         {
-            var model = await _unitOfWork.Book.UpdateAsync(book);
+            var model = await _unitOfWork.Biography.UpdateAsync(biography);
             return Ok(model);
         }
         #endregion

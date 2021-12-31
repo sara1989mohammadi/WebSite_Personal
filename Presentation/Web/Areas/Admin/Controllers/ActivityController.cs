@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Services;
 using Entites;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,18 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Controllers
+namespace Web.Areas.Admin.Controllers
 {
-    public class CVController : Controller
+    public class ActivityController : Controller
     {
         #region Fields
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IActivityService _activityService;
         #endregion
 
         #region Ctor
-        public CVController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
+        public ActivityController( IActivityService activityService)
+        {           
+            _activityService = activityService;
         }
         #endregion
 
@@ -25,28 +26,28 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            var model = await _unitOfWork.Cv.GetAllAsync();
+            var model =await _activityService.GetAll();
             return View(model);
         }
 
         public async Task<IActionResult> GetById(int id)
         {
-            var model = await _unitOfWork.Cv.GetByIdAsync(id);
+            var model = await _activityService.GetById(id);
             return View(model);
         }
-        public async Task<IActionResult> Add(CV cv)
+        public async Task<IActionResult> Add(Activity activity)
         {
-            var model = await _unitOfWork.Cv.AddAsync(cv);
+            var model =await _activityService.Add(activity);
             return View(model);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _unitOfWork.Cv.DeleteAsync(id);
+            var model = await _activityService.Delete(id);
             return View(model);
         }
-        public async Task<IActionResult> Update(CV cv)
+        public async Task<IActionResult> Update(Activity activity)
         {
-            var model = await _unitOfWork.Cv.UpdateAsync(cv);
+            var model = await _activityService.Update(activity);
             return Ok(model);
         }
         #endregion

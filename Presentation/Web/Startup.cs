@@ -37,6 +37,13 @@ namespace Web
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
         }
     }
 }

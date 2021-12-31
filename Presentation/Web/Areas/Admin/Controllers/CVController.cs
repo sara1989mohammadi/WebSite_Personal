@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Controllers
+namespace Web.Areas.Admin.Controllers
 {
-    public class ArticleController : Controller
+    public class CVController : Controller
     {
         #region Fields
         private readonly IUnitOfWork _unitOfWork;
         #endregion
 
         #region Ctor
-        public ArticleController(IUnitOfWork unitOfWork)
+        public CVController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -25,28 +25,28 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            var model = await _unitOfWork.Article.GetAllAsync();
+            var model = await _unitOfWork.Cv.GetAllAsync();
             return View(model);
         }
 
         public async Task<IActionResult> GetById(int id)
         {
-            var model = await _unitOfWork.Article.GetByIdAsync(id);
+            var model = await _unitOfWork.Cv.GetByIdAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Add(Article article)
+        public async Task<IActionResult> Add(CV cv)
         {
-            var model = await _unitOfWork.Article.AddAsync(article);
+            var model = await _unitOfWork.Cv.AddAsync(cv);
             return View(model);
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _unitOfWork.Article.DeleteAsync(id);
+            var model = await _unitOfWork.Cv.DeleteAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> Update(Article article)
+        public async Task<IActionResult> Update(CV cv)
         {
-            var model = await _unitOfWork.Article.UpdateAsync(article);
+            var model = await _unitOfWork.Cv.UpdateAsync(cv);
             return Ok(model);
         }
         #endregion
