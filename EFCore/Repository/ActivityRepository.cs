@@ -21,11 +21,12 @@ namespace EFCore.Repository
             _configuration = configuration;
         }
         #endregion
+
         #region Methods
 
         public async Task<int> AddAsync(Activity activity)
         {
-            var sql = ("Insert Into Users(UserName,Password) VALUES (@UserName,@Password)");
+            var sql = ("Insert Into Activity(Title) VALUES (@Title)");
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
