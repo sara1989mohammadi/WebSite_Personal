@@ -1,8 +1,10 @@
 ﻿using Contracts.Repositories;
+using Dapper;
 using Entites;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,18 +15,26 @@ namespace EFCore.Repository
         #region Fields
         private readonly IConfiguration _configuration;
         #endregion
+
         #region Ctor
         public BookRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }
         #endregion
+
         #region Methods
 
 
-        public Task<int> AddAsync(Book book)
+        public async Task<int> AddAsync(Book book)
         {
-            throw new NotImplementedException();
+            var sql = ("Insert Into Book(Name,Discription,Price,Author,Publisher,ISBN,ImageUrl)VALUES (@Name,@Discription,@Price,@Author,@Publisher,@ISBN,@ImageUrl)");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteAsync(sql, book);
+                return result;
+            }
         }
 
         public Task<int> DeleteAsync(int id)
@@ -42,9 +52,15 @@ namespace EFCore.Repository
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateAsync(Book book)
+        public async Task<int> UpdateAsync(Book book)
         {
-            throw new NotImplementedException();
+            var sql = ("Update Book Name=@Name,Discription=@Discription,Price=@Price,Author=@Author,Publisher=@Publisher,ISBN=@ISBN,ImageUrl=@ImageUrl");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteAsync(sql, book);
+                return result;
+            }
         }
         #endregion
     }
