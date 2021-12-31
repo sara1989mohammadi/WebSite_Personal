@@ -38,9 +38,15 @@ namespace EFCore.Repository
             }
         }
 
-        public Task<int> DeleteAsync(int id)
+        public async Task<int> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var sql = ("Delete From ShortArticle where Id=@Id");
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteAsync(sql, new { @Id = id });
+                return result;
+            }
         }
 
         public async Task<IReadOnlyList<ShortArticle>> GetAllAsync()
@@ -54,7 +60,7 @@ namespace EFCore.Repository
             }
         }
 
-        public Task<ShortArticle> GetByIdAsync(int id)
+        public async Task<ShortArticle> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
