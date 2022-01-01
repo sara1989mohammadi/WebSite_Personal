@@ -8,10 +8,12 @@ namespace Contracts.Services
 {
  public   interface IArticleService
     {
-        Task GetById(int id);
-        Task GetAll();
-        Task Add(Article article);
-        Task Update(Article article);
-        Task Delete(int id);
+        #region Methods
+        Task<Article> GetById(int id);
+        Task<IReadOnlyList<Article>> GetAll();
+        Task<int> Add(Article article);
+        Task<int> Update(Article article);
+        Task<int> Delete(int id);
+        #endregion
     }
 }
