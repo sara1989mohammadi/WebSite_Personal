@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.Services;
+using Service;
 
 namespace Web
 {
@@ -17,8 +19,17 @@ namespace Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure();           
-         
+            services.AddMvc();
+               services.AddInfrastructure();
+
+            services.AddTransient<IActivityService, ActivityService>();
+            services.AddTransient<IArticleService, ArticleService>();
+            services.AddTransient<IBiographyService, BiographyService>();
+            services.AddTransient<IBookService, BookService>();
+            services.AddTransient<ICVService, CVService>();
+            services.AddTransient<IShortArticleService, ShortArticleService>();
+            services.AddTransient<IUserService, UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +41,7 @@ namespace Web
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
