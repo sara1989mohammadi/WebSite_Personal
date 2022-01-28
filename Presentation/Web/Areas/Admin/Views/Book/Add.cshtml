@@ -1,0 +1,63 @@
+﻿@model Entites.Book
+
+<!-- BEGIN: Top Bar -->
+<div class="top-bar">
+    <!-- BEGIN: Breadcrumb -->
+    <div class="-intro-x breadcrumb ml-auto hidden sm:flex"> <a href="">اپلیکیشن</a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left breadcrumb__icon"><polyline points="15 18 9 12 15 6"></polyline></svg> <a href="" class="breadcrumb--active">داشبرد</a> </div>
+    <!-- END: Breadcrumb -->
+</div>
+<!-- END: Top Bar -->
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium ml-auto">
+        افزودن کتاب جدید
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 lg:col-span-12">
+        <!-- BEGIN: Form Layout -->
+        <div class="intro-y box p-5">
+            <form asp-action="Add">
+                @*Name*@
+                <div>
+                    <label for="crud-form-1" class="form-label">نام کتاب</label>
+                    <input id="crud-form-1" asp-for="Name" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                @*Discription*@
+                <div>
+                    <label for="crud-form-1" class="form-label">توضیحات</label>
+                    <input id="crud-form-1" asp-for="Discription" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                @*Price*@
+                <div>
+                    <label for="crud-form-1" class="form-label">قیمت</label>
+                    <input id="crud-form-1" asp-for="Price" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                @*Author*@
+                <div>
+                    <label for="crud-form-1" class="form-label">نویسنده</label>
+                    <input id="crud-form-1" asp-for="Author" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                @*Publisher*@
+                <div>
+                    <label for="crud-form-1" class="form-label">ناشر</label>
+                    <input id="crud-form-1" asp-for="Publisher" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                  @*ISBN*@
+                <div>
+                    <label for="crud-form-1" class="form-label">ISBN</label>
+                    <input id="crud-form-1" asp-for="ISBN" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                 @*ImageUrl*@
+                <div>
+                    <label for="crud-form-1" class="form-label">عکس</label>
+                    <input id="crud-form-1" asp-for="ImageUrl" type="text" class="form-control w-full" placeholder="متن ورودی">
+                </div>
+                <div class="text-left mt-5">
+                    <button type="reset" class="btn btn-outline-secondary w-24 ml-1">لغو</button>
+                    <button type="submit" class="btn btn-primary w-24">ذخیره</button>
+                </div>
+            </form>
+        </div>
+        <!-- END: Form Layout -->
+    </div>
+</div>
