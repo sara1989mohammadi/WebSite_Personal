@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Services;
 using Entites;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,44 +12,23 @@ namespace Web.Areas.Admin.Controllers
     public class ArticleController : BaseController
     {
         #region Fields
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IArticleService _articleService;
         #endregion
 
         #region Ctor
-        public ArticleController(IUnitOfWork unitOfWork)
+        public ArticleController(IArticleService articleService)
         {
-            _unitOfWork = unitOfWork;
+            _articleService = articleService;
         }
         #endregion
 
         #region Methods      
-
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Index()
         {
-            var model = await _unitOfWork.Article.GetAllAsync();
+            var model = await _articleService.GetAll();
             return View(model);
         }
 
-        public async Task<IActionResult> GetById(int id)
-        {
-            var model = await _unitOfWork.Article.GetByIdAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Add(Article article)
-        {
-            var model = await _unitOfWork.Article.AddAsync(article);
-            return View(model);
-        }
-        public async Task<IActionResult> Delete(int id)
-        {
-            var model = await _unitOfWork.Article.DeleteAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Update(Article article)
-        {
-            var model = await _unitOfWork.Article.UpdateAsync(article);
-            return Ok(model);
-        }
         #endregion
     }
 }

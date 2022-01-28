@@ -23,32 +23,7 @@ namespace Web.Areas.Admin.Controllers
 
         #region Methods      
 
-        public async Task<IActionResult> GetAll()
-        {
-            var model = await _unitOfWork.Cv.GetAllAsync();
-            return View(model);
-        }
-
-        public async Task<IActionResult> GetById(int id)
-        {
-            var model = await _unitOfWork.Cv.GetByIdAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Add(CV cv)
-        {
-            var model = await _unitOfWork.Cv.AddAsync(cv);
-            return View(model);
-        }
-        public async Task<IActionResult> Delete(int id)
-        {
-            var model = await _unitOfWork.Cv.DeleteAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Update(CV cv)
-        {
-            var model = await _unitOfWork.Cv.UpdateAsync(cv);
-            return Ok(model);
-        }
+  
         #endregion
     }
 }

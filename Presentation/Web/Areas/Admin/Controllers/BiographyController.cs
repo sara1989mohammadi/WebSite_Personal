@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Services;
 using Entites;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,43 +12,23 @@ namespace Web.Areas.Admin.Controllers
     public class BiographyController : BaseController
     {
         #region Fields
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBiographyService _biographyService;
         #endregion
 
         #region Ctor
-        public BiographyController(IUnitOfWork unitOfWork)
+        public BiographyController(IBiographyService biographyService)
         {
-            _unitOfWork = unitOfWork;
+            _biographyService = biographyService;
         }
         #endregion
         #region Methods      
-
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Index()
         {
-            var model = await _unitOfWork.Biography.GetAllAsync();
+            var model = await _biographyService.GetAll();
             return View(model);
         }
 
-        public async Task<IActionResult> GetById(int id)
-        {
-            var model = await _unitOfWork.Biography.GetByIdAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Add(Biography biography)
-        {
-            var model = await _unitOfWork.Biography.AddAsync(biography);
-            return View(model);
-        }
-        public async Task<IActionResult> Delete(int id)
-        {
-            var model = await _unitOfWork.Biography.DeleteAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Update(Biography biography)
-        {
-            var model = await _unitOfWork.Biography.UpdateAsync(biography);
-            return Ok(model);
-        }
+       
         #endregion
     }
 }

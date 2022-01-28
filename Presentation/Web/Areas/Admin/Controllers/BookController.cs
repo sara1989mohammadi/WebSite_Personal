@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Services;
 using Entites;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,43 +12,22 @@ namespace Web.Areas.Admin.Controllers
     public class BookController : BaseController
     {
         #region Fields
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBookService _bookService;
         #endregion
 
         #region Ctor
-        public BookController(IUnitOfWork unitOfWork)
+        public BookController(IBookService bookService)
         {
-            _unitOfWork = unitOfWork;
+            _bookService = bookService;
         }
         #endregion
 
         #region Methods      
 
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Index()
         {
-            var model = await _unitOfWork.Book.GetAllAsync();
+            var model = await _bookService.GetAll();
             return View(model);
-        }
-
-        public async Task<IActionResult> GetById(int id)
-        {
-            var model = await _unitOfWork.Book.GetByIdAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Add(Book book)
-        {
-            var model = await _unitOfWork.Book.AddAsync(book);
-            return View(model);
-        }
-        public async Task<IActionResult> Delete(int id)
-        {
-            var model = await _unitOfWork.Book.DeleteAsync(id);
-            return View(model);
-        }
-        public async Task<IActionResult> Update(Book book)
-        {
-            var model = await _unitOfWork.Book.UpdateAsync(book);
-            return Ok(model);
         }
         #endregion
     }
