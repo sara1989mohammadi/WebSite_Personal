@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Services;
 using Entites;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,19 +12,24 @@ namespace Web.Areas.Admin.Controllers
     public class CVController : BaseController
     {
         #region Fields
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICVService _cvService ;
         #endregion
 
         #region Ctor
-        public CVController(IUnitOfWork unitOfWork)
+        public CVController(ICVService cvService)
         {
-            _unitOfWork = unitOfWork;
+            _cvService = cvService;
         }
         #endregion
 
         #region Methods      
+        public async Task<IActionResult> Index()
+        {
+            var model = await _cvService.GetAll();
+            return View(model);
+        }
 
-  
+
         #endregion
     }
 }

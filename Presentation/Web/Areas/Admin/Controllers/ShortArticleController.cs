@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Services;
 using Entites;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,18 +12,22 @@ namespace Web.Areas.Admin.Controllers
     public class ShortArticleController : BaseController
     {
         #region Fields
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShortArticleService _shortArticleService;
         #endregion
 
         #region Ctor
-        public ShortArticleController(IUnitOfWork unitOfWork)
+        public ShortArticleController(IShortArticleService shortArticleService)
         {
-            _unitOfWork = unitOfWork;
+            _shortArticleService = shortArticleService;
         }
         #endregion
 
         #region Methods      
-
+        public async Task<IActionResult> Index()
+        {
+            var model = await _shortArticleService.GetAll();
+            return View(model);
+        }
         #endregion
     }
 }
