@@ -28,7 +28,17 @@ namespace Web.Areas.Admin.Controllers
             return View(model);
         }
 
-       
-        #endregion
-    }
+        public async Task<IActionResult> Add()
+        {
+            return View();
+
+        }
+        [HttpPost]
+            public async Task<IActionResult> Add(Biography biography)
+            {
+            var model = await _biographyService.Add(biography);
+                return RedirectToAction(nameof(Index));
+        }
+            #endregion
+        }
 }
