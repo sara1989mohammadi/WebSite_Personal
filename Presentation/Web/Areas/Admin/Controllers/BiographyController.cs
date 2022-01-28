@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Web.Areas.Admin.Controllers
 {
-    public class BiographyController : Controller
+    public class BiographyController : BaseController
     {
         #region Fields
         private readonly IUnitOfWork _unitOfWork;

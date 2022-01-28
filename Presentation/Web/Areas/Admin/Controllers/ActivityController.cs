@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Web.Areas.Admin.Controllers
 {
-    public class ActivityController : Controller
+    public class ActivityController : BaseController
     {
         #region Fields
         private readonly IActivityService _activityService;
@@ -24,7 +24,7 @@ namespace Web.Areas.Admin.Controllers
 
         #region Methods      
 
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Index()
         {
             var model =await _activityService.GetAll();
             return View(model);
@@ -35,20 +35,29 @@ namespace Web.Areas.Admin.Controllers
             var model = await _activityService.GetById(id);
             return View(model);
         }
+        public async Task<IActionResult> Add()
+        {
+            return View();
+        }
+        [HttpPost]
         public async Task<IActionResult> Add(Activity activity)
         {
-            var model =await _activityService.Add(activity);
-            return View(model);
+            var model = await _activityService.Add(activity);
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _activityService.Delete(id);
             return View(model);
         }
+        public async Task<IActionResult> Update()
+        {
+            return Ok();
+        }
         public async Task<IActionResult> Update(Activity activity)
         {
             var model = await _activityService.Update(activity);
-            return Ok(model);
+            return RedirectToAction(nameof(Index));
         }
         #endregion
     }
