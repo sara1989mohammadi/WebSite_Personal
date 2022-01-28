@@ -28,6 +28,17 @@ namespace Web.Areas.Admin.Controllers
             var model = await _shortArticleService.GetAll();
             return View(model);
         }
+        public async Task<IActionResult> Add()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(ShortArticle shortArticle)
+        {
+            var model = await _shortArticleService.Add(shortArticle);
+            return RedirectToAction(nameof(Index));
+        }
         #endregion
     }
 }

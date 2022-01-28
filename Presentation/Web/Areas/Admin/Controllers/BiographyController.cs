@@ -34,11 +34,11 @@ namespace Web.Areas.Admin.Controllers
 
         }
         [HttpPost]
-            public async Task<IActionResult> Add(Biography biography)
-            {
+        public async Task<IActionResult> Add(Biography biography)
+        {
             var model = await _biographyService.Add(biography);
-                return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
-            #endregion
-        }
+        #endregion
+    }
 }

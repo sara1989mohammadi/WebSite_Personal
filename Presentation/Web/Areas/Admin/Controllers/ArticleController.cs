@@ -28,7 +28,17 @@ namespace Web.Areas.Admin.Controllers
             var model = await _articleService.GetAll();
             return View(model);
         }
+        public async Task<IActionResult> Add()
+        {
+            return View();
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(Article article)
+        {
+            var model = await _articleService.Add(article);
+            return RedirectToAction(nameof(Index));
+        }
         #endregion
     }
 }

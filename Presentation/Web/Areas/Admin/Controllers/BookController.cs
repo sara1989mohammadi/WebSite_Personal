@@ -29,6 +29,18 @@ namespace Web.Areas.Admin.Controllers
             var model = await _bookService.GetAll();
             return View(model);
         }
+
+        public async Task<IActionResult> Add()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(Book book)
+        {
+            var model = await _bookService.Add(book);
+            return RedirectToAction(nameof(Index));
+        }
         #endregion
     }
 }

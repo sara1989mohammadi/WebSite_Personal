@@ -28,7 +28,17 @@ namespace Web.Areas.Admin.Controllers
             var model = await _cvService.GetAll();
             return View(model);
         }
+        public async Task<IActionResult> Add()
+        {
+            return View();
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(CV cv)
+        {
+            var model = await _cvService.Add(cv);
+            return RedirectToAction(nameof(Index));
+        }
 
         #endregion
     }
